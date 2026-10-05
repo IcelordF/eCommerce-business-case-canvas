@@ -32,7 +32,7 @@ Stessa geometria del BMC: a destra il cliente, a sinistra come lavori, al centro
 
 Le tre righe centrali seguono il tempo: prima dell'ordine, l'ordine, dopo l'ordine. Così a destra si legge il percorso del cliente (ti trova, compra, torna) e a sinistra quello dell'ordine (la merce c'è, parte e arriva, a volte torna indietro).
 
-Ogni blocco ha le sue domande e i suoi numeri. Sotto, al posto di Struttura dei costi e Flussi di ricavi, tre conti che raccolgono tutti i numeri dei blocchi: l'ordine, il mese, il cliente in un anno. Nessun numero resta fuori dai conti.
+Ogni blocco ha le sue domande e i suoi numeri. Le domande sono in prima persona ("Perché compreranno da me?", "Dove vendo?"): chi compila il canvas le fa a sé stesso. Sotto, al posto di Struttura dei costi e Flussi di ricavi, tre conti che raccolgono tutti i numeri dei blocchi: l'ordine, il mese, il cliente in un anno. Nessun numero resta fuori dai conti.
 
 | Blocco | Posizione | Dal BMC | Numeri |
 |---|---|---|---|
