@@ -117,7 +117,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--penna); out
     <p class="occhiello">Bozza 0.3 · 5 ottobre 2026</p>
     <h1>eCommerce Business Case Canvas</h1>
     <p class="lede">Il Business Model Canvas rifatto per chi vende online. L'unità di misura è l'ordine: da dove arriva, come parte, se torna indietro, quanto lascia in tasca.</p>
-    <p class="lettura">Si lavora in due passi. Prima la strategia: nove blocchi, a destra il cliente, a sinistra come lavori, al centro la proposta, con le righe che seguono il tempo dell'ordine. Poi i conti: ogni blocco ha i suoi numeri e tre scontrini li mettono insieme, fino al risultato del mese.</p>
+    <p class="lettura">Si lavora in due passi. Prima la strategia: nove blocchi, a destra il cliente, a sinistra le operazioni, al centro la proposta, con le righe che seguono il tempo dell'ordine. Poi i conti: ogni blocco ha i suoi numeri e tre scontrini li mettono insieme, fino al risultato del mese.</p>
     <div class="comandi">
       <div class="vista passi" role="group" aria-label="Passo">
         <button type="button" id="passo-strategia" data-passo="strategia" aria-pressed="true">1 · Strategia</button>
@@ -128,23 +128,23 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--penna); out
         <button type="button" id="v-esempio" data-vista="esempio" aria-pressed="false">Esempio</button>
       </div>
     </div>
-    <p class="lettura solo-conti">Le cifre sono quelle dell'esempio: mettici le tue e i conti si rifanno.</p>
+    <p class="lettura solo-conti">Le cifre sono quelle dell'esempio: cambiandole, i conti si rifanno.</p>
     <p class="nota-es" id="nota-es" hidden>Esempio inventato: un piccolo calzaturificio marchigiano che vende online in Italia e in Germania. Le cifre sono verosimili, non misurate.</p>
   </header>
 
   <div class="canvas">
-    <p class="intesta" style="grid-area: h1">Come lavori</p>
-    <p class="intesta" style="grid-area: h2">Cosa offri</p>
-    <p class="intesta" style="grid-area: h3">A chi vendi</p>
+    <p class="intesta" style="grid-area: h1">Come lavoro</p>
+    <p class="intesta" style="grid-area: h2">Cosa offro</p>
+    <p class="intesta" style="grid-area: h3">A chi vendo</p>
 
     <section class="b" style="grid-area: pro">
       <h2>Proposta</h2>
       <ul class="dom">
-        <li>Perché comprano da te e non su un marketplace?</li>
-        <li>Quali prodotti fanno la maggior parte delle vendite?</li>
-        <li>Cosa prometti su consegna e reso, e lo mantieni?</li>
+        <li>Perché compreranno da me e non su un marketplace?</li>
+        <li>Quali prodotti fanno la maggior parte delle mie vendite?</li>
+        <li>Cosa prometto su consegna e reso, e lo mantengo?</li>
       </ul>
-      <p class="es">Scarpe in pelle fatte a mano nelle Marche, 40 modelli: 8 fanno metà delle vendite. Prezzo pieno, saldi due volte l'anno. Promessa: consegna in 2 giorni in Italia, spedizione gratis sopra i 99 €, cambio taglia gratis.</p>
+      <p class="es">Vendo scarpe in pelle fatte a mano nelle Marche: 40 modelli, 8 fanno metà delle vendite. Prezzo pieno, saldi due volte l'anno. Prometto consegna in 2 giorni in Italia, spedizione gratis sopra i 99 € e cambio taglia gratis.</p>
       <div class="numeri">
         <label for="prezzo">Valore dell'ordine a prezzo pieno</label><span class="u"><input id="prezzo" type="number" inputmode="decimal" min="0" step="0.01" value="120"> €</span>
         <label for="sconti">Sconti e codici, in media</label><span class="u"><input id="sconti" type="number" inputmode="decimal" min="0" step="0.01" value="8"> €</span>
@@ -156,11 +156,12 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--penna); out
     <section class="b" style="grid-area: cli">
       <h2>Clienti</h2>
       <ul class="dom">
-        <li>Chi compra, e chi compra una seconda volta?</li>
-        <li>In quali paesi, e quanto pesa ciascuno?</li>
-        <li>Quanti ordini al mese, e quanto spendono?</li>
+        <li>Chi è il mio cliente?</li>
+        <li>Chi compra da me, e chi compra una seconda volta?</li>
+        <li>In quali paesi vendo, e quanto pesa ciascuno?</li>
+        <li>Quanti ordini ricevo al mese, e di che valore?</li>
       </ul>
-      <p class="es">Donne e uomini tra 30 e 55 anni che cercano scarpe fatte in Italia. Italia 70%, Germania 30%. 500 ordini al mese, spesa media 112 € senza IVA.</p>
+      <p class="es">I miei clienti sono donne e uomini tra 30 e 55 anni che cercano scarpe fatte in Italia. Italia 70%, Germania 30%. Ricevo 500 ordini al mese, spesa media 112 € senza IVA.</p>
       <div class="numeri">
         <label for="ordini">Ordini al mese</label><span class="u"><input id="ordini" type="number" inputmode="decimal" min="0" step="1" value="500"></span>
         <label for="ripeti">Ordini per cliente in un anno</label><span class="u"><input id="ripeti" type="number" inputmode="decimal" min="0" step="0.1" value="1.5"></span>
@@ -172,11 +173,11 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--penna); out
       <p class="riga">Prima dell'ordine</p>
       <h2>Acquisizione</h2>
       <ul class="dom">
-        <li>Da quali canali arrivano i clienti nuovi?</li>
-        <li>Quanto costa un cliente nuovo, canale per canale?</li>
-        <li>Quali canali portano clienti che poi tornano?</li>
+        <li>Da quali canali arrivano i miei clienti nuovi?</li>
+        <li>Quanto mi costa un cliente nuovo, canale per canale?</li>
+        <li>Quali canali mi portano clienti che poi tornano?</li>
       </ul>
-      <p class="es">Instagram e Meta per i clienti nuovi, Google Shopping per chi cerca già un modello, newsletter per chi ha comprato. Un cliente nuovo costa 38 € da Meta, 21 € da Google, 30 € in media. In tutto 11.000 € al mese.</p>
+      <p class="es">Uso Instagram e Meta per i clienti nuovi, Google Shopping per chi cerca già un modello, la newsletter per chi ha comprato. Un cliente nuovo mi costa 38 € da Meta, 21 € da Google, 30 € in media. In tutto spendo 11.000 € al mese.</p>
       <div class="numeri">
         <label for="mkt">Marketing al mese</label><span class="u"><input id="mkt" type="number" inputmode="decimal" min="0" step="100" value="11000"> €</span>
         <label for="cac">Costo di un cliente nuovo</label><span class="u"><input id="cac" type="number" inputmode="decimal" min="0" step="0.01" value="30"> €</span>
@@ -188,12 +189,12 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--penna); out
       <p class="riga">L'ordine</p>
       <h2>Conversione</h2>
       <ul class="dom">
-        <li>Dove vendi: il tuo sito, i marketplace, tutti e due?</li>
-        <li>Quali pagamenti e quali consegne vede il cliente al checkout?</li>
-        <li>Quanto paga la spedizione, e da che soglia è gratis?</li>
-        <li>Quanti visitatori comprano, quanti carrelli restano a metà?</li>
+        <li>Dove vendo: sul mio sito, sui marketplace, su tutti e due?</li>
+        <li>Quali pagamenti e quali consegne offro al checkout?</li>
+        <li>Quanto faccio pagare la spedizione, e da che soglia è gratis?</li>
+        <li>Quanti dei miei visitatori comprano, e quanti carrelli restano a metà?</li>
       </ul>
-      <p class="es">Negozio su Shopify, più qualche blog di moda in affiliazione. Carta, PayPal e Klarna. Spedizione gratis sopra i 99 €, sotto costa 5,90 €: la paga un ordine su cinque. Compra l'1,6% dei visitatori, il 71% dei carrelli resta a metà.</p>
+      <p class="es">Vendo dal mio negozio su Shopify, più qualche blog di moda in affiliazione. Accetto carta, PayPal e Klarna. Spedizione gratis sopra i 99 €, sotto la faccio pagare 5,90 €: la paga un ordine su cinque. Compra l'1,6% dei visitatori, il 71% dei carrelli resta a metà.</p>
       <div class="numeri">
         <label for="quotasped">Ordini che pagano la spedizione</label><span class="u"><input id="quotasped" type="number" inputmode="decimal" min="0" max="100" step="1" value="20"> %</span>
         <label for="spedcliente">Quanto la pagano</label><span class="u"><input id="spedcliente" type="number" inputmode="decimal" min="0" step="0.01" value="5.9"> €</span>
@@ -207,11 +208,11 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--penna); out
       <p class="riga">Dopo l'ordine</p>
       <h2>Dopo l'acquisto</h2>
       <ul class="dom">
-        <li>Come sa il cliente dov'è il pacco, senza doverti scrivere?</li>
-        <li>Quante richieste di assistenza arrivano ogni 100 ordini, e per cosa?</li>
-        <li>Cosa lo porta a comprare di nuovo, e quando?</li>
+        <li>Come fa il mio cliente a sapere dov'è il pacco, senza dovermi scrivere?</li>
+        <li>Quante richieste di assistenza ricevo ogni 100 ordini, e per cosa?</li>
+        <li>Cosa porta il mio cliente a comprare di nuovo, e quando?</li>
       </ul>
-      <p class="es">Tracking via mail e WhatsApp, su una pagina col marchio del negozio. 11 richieste di assistenza ogni 100 ordini, metà sono «dov'è il mio pacco». Dopo 60 giorni arriva un codice per il secondo paio. Torna il 35% dei clienti, il 48% tra chi ha fatto un cambio taglia senza problemi.</p>
+      <p class="es">Mando il tracking via mail e WhatsApp, su una pagina col mio marchio. Ricevo 11 richieste di assistenza ogni 100 ordini, metà sono «dov'è il mio pacco». Dopo 60 giorni mando un codice per il secondo paio. Torna il 35% dei clienti, il 48% tra chi ha fatto un cambio taglia senza problemi.</p>
       <div class="numeri">
         <label for="richieste">Richieste di assistenza ogni 100 ordini</label><span class="u"><input id="richieste" type="number" inputmode="decimal" min="0" step="1" value="11"></span>
         <label for="richiesta">Costo di una richiesta, in tempo o pagata fuori</label><span class="u"><input id="richiesta" type="number" inputmode="decimal" min="0" step="0.01" value="4"> €</span>
@@ -223,11 +224,11 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--penna); out
       <p class="riga">Prima dell'ordine</p>
       <h2>Magazzino</h2>
       <ul class="dom">
-        <li>Dove sta la merce: magazzino tuo, logistica esterna, fornitore?</li>
-        <li>Quello che il sito mostra disponibile c'è davvero?</li>
-        <li>Quanti soldi sono fermi in scorte, e quanta merce perde valore?</li>
+        <li>Dove tengo la merce: magazzino mio, logistica esterna, fornitore?</li>
+        <li>Quello che il mio sito mostra disponibile c'è davvero?</li>
+        <li>Quanti soldi ho fermi in scorte, e quanta merce perde valore?</li>
       </ul>
-      <p class="es">Scorte in laboratorio, circa 1.200 paia. Le taglie estreme finiscono presto e il sito se ne accorge con un giorno di ritardo. A fine stagione restano modelli da svendere: circa 400 € al mese di merce che perde valore.</p>
+      <p class="es">Tengo le scorte in laboratorio, circa 1.200 paia. Le taglie estreme finiscono presto e il mio sito se ne accorge con un giorno di ritardo. A fine stagione mi restano modelli da svendere: circa 400 € al mese di merce che perde valore.</p>
       <div class="numeri">
         <label for="spazi">Spazi e magazzino al mese</label><span class="u"><input id="spazi" type="number" inputmode="decimal" min="0" step="100" value="1200"> €</span>
         <label for="invenduto">Merce invenduta o svalutata al mese</label><span class="u"><input id="invenduto" type="number" inputmode="decimal" min="0" step="100" value="400"> €</span>
@@ -239,11 +240,11 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--penna); out
       <p class="riga">L'ordine</p>
       <h2>Consegna</h2>
       <ul class="dom">
-        <li>Quanto passa dall'ordine al ritiro del corriere?</li>
-        <li>Quali corrieri e quali servizi, per quali paesi, a che prezzo?</li>
-        <li>Quanti pacchi arrivano nei tempi promessi, e al primo tentativo?</li>
+        <li>Quanto ci metto dall'ordine al ritiro del corriere?</li>
+        <li>Quali corrieri e quali servizi uso, per quali paesi, a che prezzo?</li>
+        <li>Quanti dei miei pacchi arrivano nei tempi promessi, e al primo tentativo?</li>
       </ul>
-      <p class="es">Gli ordini entro le 13 partono in giornata. Un corriere per l'Italia, uno per la Germania: 7,50 € a spedizione in media. Nei tempi promessi arriva il 93% dei pacchi, al primo tentativo l'89%.</p>
+      <p class="es">Gli ordini entro le 13 li spedisco in giornata. Uso un corriere per l'Italia e uno per la Germania: pago 7,50 € a spedizione in media. Nei tempi promessi arriva il 93% dei pacchi, al primo tentativo l'89%.</p>
       <div class="numeri">
         <label for="sped">Costo di una spedizione, pagato al corriere</label><span class="u"><input id="sped" type="number" inputmode="decimal" min="0" step="0.01" value="7.5"> €</span>
         <label for="evasione">Evasione e imballo per ordine</label><span class="u"><input id="evasione" type="number" inputmode="decimal" min="0" step="0.01" value="3"> €</span>
@@ -257,12 +258,12 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--penna); out
       <p class="riga">Dopo l'ordine</p>
       <h2>Resi</h2>
       <ul class="dom">
-        <li>Quanti ordini tornano indietro, e perché?</li>
+        <li>Quanti ordini mi tornano indietro, e perché?</li>
         <li>Quanti diventano un cambio e quanti un rimborso?</li>
-        <li>Chi paga il reso, e quanto costa davvero?</li>
-        <li>Quanto ci mette la merce a tornare in vendita?</li>
+        <li>Chi paga il reso, e quanto mi costa davvero?</li>
+        <li>Quanto ci metto a rimettere in vendita la merce?</li>
       </ul>
-      <p class="es">Torna il 22% degli ordini, quasi sempre per la taglia: 10 su 100 diventano un cambio, 12 un rimborso. Il reso costa al cliente 5,90 €, trattenuti dal rimborso. Un paio torna in vendita dopo 6 giorni.</p>
+      <p class="es">Mi torna il 22% degli ordini, quasi sempre per la taglia: 10 su 100 diventano un cambio, 12 un rimborso. Il reso lo faccio pagare 5,90 €, trattenuti dal rimborso. Rimetto in vendita un paio dopo 6 giorni.</p>
       <div class="numeri">
         <label for="rimborsi">Ordini resi con rimborso</label><span class="u"><input id="rimborsi" type="number" inputmode="decimal" min="0" max="100" step="0.1" value="12"> %</span>
         <label for="cambi">Ordini cambiati</label><span class="u"><input id="cambi" type="number" inputmode="decimal" min="0" max="100" step="0.1" value="10"> %</span>
@@ -274,11 +275,11 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--penna); out
     <section class="b" style="grid-area: par">
       <h2>Partner e strumenti</h2>
       <ul class="dom">
-        <li>Quali sistemi tengono insieme ordini, scorte, spedizioni e pagamenti?</li>
-        <li>Cosa fai tu e cosa affidi ad altri?</li>
-        <li>Chi lavora sul negozio, e su cosa?</li>
+        <li>Quali sistemi tengono insieme i miei ordini, le scorte, le spedizioni e i pagamenti?</li>
+        <li>Cosa faccio io e cosa affido ad altri?</li>
+        <li>Chi lavora sul mio negozio, e su cosa?</li>
       </ul>
-      <p class="es">Shopify, un gestionale per le scorte, due corrieri, una piattaforma per spedizioni e tracking, Klarna, un'agenzia per le campagne. Sull'online lavorano 4 persone, una a tempo pieno.</p>
+      <p class="es">Uso Shopify, un gestionale per le scorte, due corrieri, una piattaforma per spedizioni e tracking, Klarna. Le campagne le affido a un'agenzia. Sull'online lavoriamo in 4, uno a tempo pieno.</p>
       <div class="numeri">
         <label for="persone">Persone al mese, assistenza a parte</label><span class="u"><input id="persone" type="number" inputmode="decimal" min="0" step="100" value="7000"> €</span>
         <label for="software">Piattaforma e software al mese</label><span class="u"><input id="software" type="number" inputmode="decimal" min="0" step="100" value="700"> €</span>
@@ -295,8 +296,8 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--penna); out
     <section class="b" style="grid-area: cto">
       <h2>Conto dell'ordine</h2>
       <ul class="dom">
-        <li>Quanto resta di un ordine medio, prima e dopo il marketing?</li>
-        <li>Quale riga pesa di più, e quale puoi spostare?</li>
+        <li>Quanto mi resta di un ordine medio, prima e dopo il marketing?</li>
+        <li>Quale riga pesa di più, e quale posso spostare?</li>
       </ul>
       <div class="scontrino">
         <p class="s-testa">Ordine medio · IVA esclusa · percentuali su <span id="o-pagato">112,00</span> € pagati</p>
@@ -316,7 +317,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--penna); out
         <div class="s-riga"><span>Cambi: rientro e nuova spedizione</span><output id="o-cambi">−2,15</output></div>
         <div class="s-sub"><span>Margine dopo i costi dell'ordine <small id="p-cm2">34,0%</small></span><output id="o-cm2">38,07</output></div>
         <div class="s-riga"><span>Marketing per ordine <small id="o-mkt-nota">11.000,00&nbsp;€ ÷ 500&nbsp;ordini</small></span><output id="o-mkt">−22,00</output></div>
-        <div class="s-totale"><span>Resta in tasca per ordine <small id="p-cm3">14,3%</small></span><output id="o-cm3">16,07 €</output></div>
+        <div class="s-totale"><span>Mi resta in tasca per ordine <small id="p-cm3">14,3%</small></span><output id="o-cm3">16,07 €</output></div>
       </div>
       <p class="dal">dal BMC: Flussi di ricavi e Struttura dei costi, per un ordine</p>
     </section>
@@ -324,8 +325,8 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--penna); out
     <section class="b" style="grid-area: mes">
       <h2>Conto del mese</h2>
       <ul class="dom">
-        <li>Quanti ordini servono per coprire marketing e costi fissi?</li>
-        <li>Quali costi fissi salgono a scalini quando crescono gli ordini?</li>
+        <li>Quanti ordini mi servono per coprire marketing e costi fissi?</li>
+        <li>Quali dei miei costi fissi salgono a scalini quando crescono gli ordini?</li>
       </ul>
       <div class="scontrino">
         <p class="s-testa">Chiusura del mese · prima delle tasse</p>
@@ -347,9 +348,9 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--penna); out
     <section class="b" style="grid-area: tem">
       <h2>Il cliente nel tempo</h2>
       <ul class="dom">
-        <li>Quanti ordini fa un cliente in un anno?</li>
-        <li>Quanto passa tra il primo e il secondo ordine?</li>
-        <li>Quanto rende un cliente in un anno, rispetto a quanto costa acquisirlo?</li>
+        <li>Quanti ordini mi fa un cliente in un anno?</li>
+        <li>Quanto passa tra il suo primo e il suo secondo ordine?</li>
+        <li>Quanto mi rende un cliente in un anno, rispetto a quanto mi costa acquisirlo?</li>
       </ul>
       <div class="scontrino">
         <p class="s-testa">Un cliente in un anno</p>
