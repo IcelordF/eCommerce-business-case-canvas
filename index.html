@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Un canvas per chi vende online, derivato dal Business Model Canvas: prima la strategia in nove blocchi, poi i conti dell'ordine, del mese e del cliente in un anno.">
+<title>eCommerce Business Case Canvas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=IBM+Plex+Mono:wght@400;600&family=Public+Sans:wght@400;600&display=swap">
+<style>
+/* Poster del BMC stampato: blocchi divisi da un filo, niente card. L'esempio è scritto a penna blu, i conti sono scontrini. */
+:root {
+  --carta: #eef1f5;
+  --foglio: #fdfdfe;
+  --inchiostro: #171a21;
+  --grigio: #596170;
+  --filo: #c9d0da;
+  --penna: #2342b8;
+  --scontrino: #fffdf6;
+  --perdita: #b42318;
+  --f-titolo: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+  --f-testo: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+  --f-cifre: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --carta: #0f1115; --foglio: #171a20; --inchiostro: #e7eaf0; --grigio: #9ba3b1;
+    --filo: #2e343e; --penna: #9db0ff; --scontrino: #20232a; --perdita: #ff8a7a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --carta: #0f1115; --foglio: #171a20; --inchiostro: #e7eaf0; --grigio: #9ba3b1;
+  --filo: #2e343e; --penna: #9db0ff; --scontrino: #20232a; --perdita: #ff8a7a;
+  color-scheme: dark;
+}
+
+body { margin: 0; background: var(--carta); color: var(--inchiostro); font: 400 15px/1.5 var(--f-testo); }
+.pagina { max-width: 1480px; margin: 0 auto; padding-inline: clamp(16px, 3vw, 40px); padding-block: 28px 48px; }
+
+.testa { display: grid; gap: 12px; margin-bottom: 24px; max-width: 72ch; }
+.occhiello { margin: 0; font: 600 .72rem/1 var(--f-cifre); letter-spacing: .08em; text-transform: uppercase; color: var(--grigio); }
+h1 { margin: 0; font: 800 clamp(2.6rem, 6vw, 4.4rem)/.9 var(--f-titolo); text-transform: uppercase; letter-spacing: .01em; text-wrap: balance; }
+.lede { margin: 0; font-size: 1.05rem; }
+.lettura { margin: 0; color: var(--grigio); font-size: .92rem; }
+.vista { display: inline-flex; width: max-content; border: 1px solid var(--inchiostro); }
+.vista button { padding: 9px 14px; border: 0; background: transparent; color: var(--inchiostro); font: 600 .78rem/1 var(--f-testo); letter-spacing: .06em; text-transform: uppercase; cursor: pointer; }
+.vista button[aria-pressed="true"] { background: var(--inchiostro); color: var(--foglio); }
+.passi button { padding: 12px 18px; font-size: .9rem; }
+.comandi { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+button:focus-visible, input:focus-visible { outline: 2px solid var(--penna); outline-offset: 2px; }
+.nota-es { margin: 0; color: var(--penna); font-size: .9rem; }
+
+.canvas {
+  display: grid; gap: 1px; background: var(--filo); border: 1px solid var(--filo);
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "pro" "cli" "acq" "cnv" "dop" "mag" "cns" "res" "par";
+}
+.intesta { display: none; margin: 0; padding: 7px 16px; background: var(--inchiostro); color: var(--foglio); font: 600 .7rem/1.2 var(--f-cifre); letter-spacing: .09em; text-transform: uppercase; }
+.b { display: flex; flex-direction: column; gap: 8px; min-width: 0; padding: 14px 16px 16px; background: var(--foglio); }
+.riga { margin: 0; font: 600 .68rem/1 var(--f-cifre); letter-spacing: .09em; text-transform: uppercase; color: var(--grigio); }
+.b h2 { margin: 0; font: 800 1.45rem/1 var(--f-titolo); text-transform: uppercase; letter-spacing: .015em; }
+.dom { margin: 0; padding-left: 1.1em; display: grid; gap: 5px; color: var(--grigio); font-size: .9rem; }
+.es { margin: 0; color: var(--penna); font-size: .93rem; }
+.dal { margin: auto 0 0; padding-top: 8px; font: 400 .68rem/1.35 var(--f-cifre); color: var(--grigio); }
+.pagina[data-vista="domande"] .es, .pagina[data-vista="esempio"] .canvas .dom { display: none; }
+.pagina[data-passo="strategia"] :is(.numeri, .solo-conti) { display: none; }
+.pagina[data-passo="conti"] .canvas :is(.dom, .es, .dal), .pagina[data-passo="conti"] .solo-strategia { display: none; }
+
+.conti { display: grid; gap: 1px; background: var(--filo); border: 1px solid var(--filo); border-top: 0; grid-template-columns: minmax(0, 1fr); grid-template-areas: "cto" "mes" "tem"; }
+.avanti { display: block; width: 100%; margin-top: 16px; padding: 14px 16px; border: 0; background: var(--inchiostro); color: var(--foglio); font: 600 .9rem/1.35 var(--f-testo); text-align: left; cursor: pointer; }
+
+.numeri { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 5px 10px; align-items: baseline; padding-top: 10px; border-top: 1px dashed var(--filo); font-size: .82rem; color: var(--grigio); }
+.u { white-space: nowrap; font: 400 .82rem/1.2 var(--f-cifre); color: var(--grigio); }
+.b input { width: 5.6em; padding: 2px 5px; border: 0; border-bottom: 1px dashed var(--grigio); background: transparent; color: var(--penna); font: inherit; text-align: right; font-variant-numeric: tabular-nums; -moz-appearance: textfield; }
+.b input::-webkit-inner-spin-button, .b input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+
+@media (min-width: 720px) {
+  .canvas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas: "pro cli" "acq mag" "cnv cns" "dop res" "par par";
+  }
+  .conti { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: "cto cto" "mes tem"; }
+}
+@media (min-width: 1180px) {
+  .canvas {
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+    grid-template-areas:
+      "h1  h1  h1  h1  h2  h2  h3  h3  h3  h3"
+      "par par mag mag pro pro acq acq cli cli"
+      "par par cns cns pro pro cnv cnv cli cli"
+      "par par res res pro pro dop dop cli cli";
+  }
+  .conti { grid-template-columns: minmax(0, 4fr) minmax(0, 3fr) minmax(0, 3fr); grid-template-areas: "cto mes tem"; }
+  .intesta { display: block; }
+}
+
+.scontrino { display: grid; gap: 3px; max-width: 520px; padding: 14px 16px 16px; background: var(--scontrino); border: 1px solid var(--filo); font: 400 .8rem/1.45 var(--f-cifre); }
+.s-testa { margin: 0 0 6px; text-align: center; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--grigio); }
+.s-riga, .s-sub, .s-totale { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: baseline; }
+.scontrino output { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.scontrino small { display: block; color: var(--grigio); font-size: .7rem; font-weight: 400; }
+.s-info { color: var(--grigio); }
+.s-sub { margin: 3px 0 6px; padding-top: 5px; border-top: 1px dashed var(--grigio); font-weight: 600; }
+.s-totale { margin-top: 4px; padding-top: 8px; border-top: 3px double var(--inchiostro); font-weight: 600; }
+.s-totale output { font-size: 1.15rem; }
+.s-dopo { margin: 6px 0 0; }
+.perdita { color: var(--perdita); }
+.piede { margin: 20px 0 0; max-width: 84ch; color: var(--grigio); font-size: .8rem; }
+.piede a { color: inherit; }
+</style>
+</head>
+<body>
+<main class="pagina" data-passo="strategia" data-vista="domande">
+  <header class="testa">
+    <p class="occhiello">Bozza 0.3 · 5 ottobre 2026</p>
+    <h1>eCommerce Business Case Canvas</h1>
+    <p class="lede">Il Business Model Canvas rifatto per chi vende online. L'unità di misura è l'ordine: da dove arriva, come parte, se torna indietro, quanto lascia in tasca.</p>
+    <p class="lettura">Si lavora in due passi. Prima la strategia: nove blocchi, a destra il cliente, a sinistra come lavori, al centro la proposta, con le righe che seguono il tempo dell'ordine. Poi i conti: ogni blocco ha i suoi numeri e tre scontrini li mettono insieme, fino al risultato del mese.</p>
+    <div class="comandi">
+      <div class="vista passi" role="group" aria-label="Passo">
+        <button type="button" id="passo-strategia" data-passo="strategia" aria-pressed="true">1 · Strategia</button>
+        <button type="button" id="passo-conti" data-passo="conti" aria-pressed="false">2 · Conti</button>
+      </div>
+      <div class="vista solo-strategia" role="group" aria-label="Cosa mostrare nei blocchi">
+        <button type="button" id="v-domande" data-vista="domande" aria-pressed="true">Domande</button>
+        <button type="button" id="v-esempio" data-vista="esempio" aria-pressed="false">Esempio</button>
+      </div>
+    </div>
+    <p class="lettura solo-conti">Le cifre sono quelle dell'esempio: mettici le tue e i conti si rifanno.</p>
+    <p class="nota-es" id="nota-es" hidden>Esempio inventato: un piccolo calzaturificio marchigiano che vende online in Italia e in Germania. Le cifre sono verosimili, non misurate.</p>
+  </header>
+
+  <div class="canvas">
+    <p class="intesta" style="grid-area: h1">Come lavori</p>
+    <p class="intesta" style="grid-area: h2">Cosa offri</p>
+    <p class="intesta" style="grid-area: h3">A chi vendi</p>
+
+    <section class="b" style="grid-area: pro">
+      <h2>Proposta</h2>
+      <ul class="dom">
+        <li>Perché comprano da te e non su un marketplace?</li>
+        <li>Quali prodotti fanno la maggior parte delle vendite?</li>
+        <li>Cosa prometti su consegna e reso, e lo mantieni?</li>
+      </ul>
+      <p class="es">Scarpe in pelle fatte a mano nelle Marche, 40 modelli: 8 fanno metà delle vendite. Prezzo pieno, saldi due volte l'anno. Promessa: consegna in 2 giorni in Italia, spedizione gratis sopra i 99 €, cambio taglia gratis.</p>
+      <div class="numeri">
+        <label for="prezzo">Valore dell'ordine a prezzo pieno</label><span class="u"><input id="prezzo" type="number" inputmode="decimal" min="0" step="0.01" value="120"> €</span>
+        <label for="sconti">Sconti e codici, in media</label><span class="u"><input id="sconti" type="number" inputmode="decimal" min="0" step="0.01" value="8"> €</span>
+        <label for="merce">Costo della merce, con trasporto dal fornitore e dazi</label><span class="u"><input id="merce" type="number" inputmode="decimal" min="0" step="0.01" value="48"> €</span>
+      </div>
+      <p class="dal">dal BMC: Proposta di valore</p>
+    </section>
+
+    <section class="b" style="grid-area: cli">
+      <h2>Clienti</h2>
+      <ul class="dom">
+        <li>Chi compra, e chi compra una seconda volta?</li>
+        <li>In quali paesi, e quanto pesa ciascuno?</li>
+        <li>Quanti ordini al mese, e quanto spendono?</li>
+      </ul>
+      <p class="es">Donne e uomini tra 30 e 55 anni che cercano scarpe fatte in Italia. Italia 70%, Germania 30%. 500 ordini al mese, spesa media 112 € senza IVA.</p>
+      <div class="numeri">
+        <label for="ordini">Ordini al mese</label><span class="u"><input id="ordini" type="number" inputmode="decimal" min="0" step="1" value="500"></span>
+        <label for="ripeti">Ordini per cliente in un anno</label><span class="u"><input id="ripeti" type="number" inputmode="decimal" min="0" step="0.1" value="1.5"></span>
+      </div>
+      <p class="dal">dal BMC: Segmenti di clientela</p>
+    </section>
+
+    <section class="b" style="grid-area: acq">
+      <p class="riga">Prima dell'ordine</p>
+      <h2>Acquisizione</h2>
+      <ul class="dom">
+        <li>Da quali canali arrivano i clienti nuovi?</li>
+        <li>Quanto costa un cliente nuovo, canale per canale?</li>
+        <li>Quali canali portano clienti che poi tornano?</li>
+      </ul>
+      <p class="es">Instagram e Meta per i clienti nuovi, Google Shopping per chi cerca già un modello, newsletter per chi ha comprato. Un cliente nuovo costa 38 € da Meta, 21 € da Google, 30 € in media. In tutto 11.000 € al mese.</p>
+      <div class="numeri">
+        <label for="mkt">Marketing al mese</label><span class="u"><input id="mkt" type="number" inputmode="decimal" min="0" step="100" value="11000"> €</span>
+        <label for="cac">Costo di un cliente nuovo</label><span class="u"><input id="cac" type="number" inputmode="decimal" min="0" step="0.01" value="30"> €</span>
+      </div>
+      <p class="dal">dal BMC: Canali, fase di conoscenza</p>
+    </section>
+
+    <section class="b" style="grid-area: cnv">
+      <p class="riga">L'ordine</p>
+      <h2>Conversione</h2>
+      <ul class="dom">
+        <li>Dove vendi: il tuo sito, i marketplace, tutti e due?</li>
+        <li>Quali pagamenti e quali consegne vede il cliente al checkout?</li>
+        <li>Quanto paga la spedizione, e da che soglia è gratis?</li>
+        <li>Quanti visitatori comprano, quanti carrelli restano a metà?</li>
+      </ul>
+      <p class="es">Negozio su Shopify, più qualche blog di moda in affiliazione. Carta, PayPal e Klarna. Spedizione gratis sopra i 99 €, sotto costa 5,90 €: la paga un ordine su cinque. Compra l'1,6% dei visitatori, il 71% dei carrelli resta a metà.</p>
+      <div class="numeri">
+        <label for="quotasped">Ordini che pagano la spedizione</label><span class="u"><input id="quotasped" type="number" inputmode="decimal" min="0" max="100" step="1" value="20"> %</span>
+        <label for="spedcliente">Quanto la pagano</label><span class="u"><input id="spedcliente" type="number" inputmode="decimal" min="0" step="0.01" value="5.9"> €</span>
+        <label for="pagamento">Commissioni di pagamento</label><span class="u"><input id="pagamento" type="number" inputmode="decimal" min="0" step="0.1" value="2.2"> %</span>
+        <label for="vendita">Commissioni di marketplace e affiliati</label><span class="u"><input id="vendita" type="number" inputmode="decimal" min="0" step="0.1" value="2"> %</span>
+      </div>
+      <p class="dal">dal BMC: Canali, fase di acquisto</p>
+    </section>
+
+    <section class="b" style="grid-area: dop">
+      <p class="riga">Dopo l'ordine</p>
+      <h2>Dopo l'acquisto</h2>
+      <ul class="dom">
+        <li>Come sa il cliente dov'è il pacco, senza doverti scrivere?</li>
+        <li>Quante richieste di assistenza arrivano ogni 100 ordini, e per cosa?</li>
+        <li>Cosa lo porta a comprare di nuovo, e quando?</li>
+      </ul>
+      <p class="es">Tracking via mail e WhatsApp, su una pagina col marchio del negozio. 11 richieste di assistenza ogni 100 ordini, metà sono «dov'è il mio pacco». Dopo 60 giorni arriva un codice per il secondo paio. Torna il 35% dei clienti, il 48% tra chi ha fatto un cambio taglia senza problemi.</p>
+      <div class="numeri">
+        <label for="richieste">Richieste di assistenza ogni 100 ordini</label><span class="u"><input id="richieste" type="number" inputmode="decimal" min="0" step="1" value="11"></span>
+        <label for="richiesta">Costo di una richiesta, in tempo o pagata fuori</label><span class="u"><input id="richiesta" type="number" inputmode="decimal" min="0" step="0.01" value="4"> €</span>
+      </div>
+      <p class="dal">dal BMC: Relazioni con i clienti e Canali, post-vendita</p>
+    </section>
+
+    <section class="b" style="grid-area: mag">
+      <p class="riga">Prima dell'ordine</p>
+      <h2>Magazzino</h2>
+      <ul class="dom">
+        <li>Dove sta la merce: magazzino tuo, logistica esterna, fornitore?</li>
+        <li>Quello che il sito mostra disponibile c'è davvero?</li>
+        <li>Quanti soldi sono fermi in scorte, e quanta merce perde valore?</li>
+      </ul>
+      <p class="es">Scorte in laboratorio, circa 1.200 paia. Le taglie estreme finiscono presto e il sito se ne accorge con un giorno di ritardo. A fine stagione restano modelli da svendere: circa 400 € al mese di merce che perde valore.</p>
+      <div class="numeri">
+        <label for="spazi">Spazi e magazzino al mese</label><span class="u"><input id="spazi" type="number" inputmode="decimal" min="0" step="100" value="1200"> €</span>
+        <label for="invenduto">Merce invenduta o svalutata al mese</label><span class="u"><input id="invenduto" type="number" inputmode="decimal" min="0" step="100" value="400"> €</span>
+      </div>
+      <p class="dal">dal BMC: Risorse chiave</p>
+    </section>
+
+    <section class="b" style="grid-area: cns">
+      <p class="riga">L'ordine</p>
+      <h2>Consegna</h2>
+      <ul class="dom">
+        <li>Quanto passa dall'ordine al ritiro del corriere?</li>
+        <li>Quali corrieri e quali servizi, per quali paesi, a che prezzo?</li>
+        <li>Quanti pacchi arrivano nei tempi promessi, e al primo tentativo?</li>
+      </ul>
+      <p class="es">Gli ordini entro le 13 partono in giornata. Un corriere per l'Italia, uno per la Germania: 7,50 € a spedizione in media. Nei tempi promessi arriva il 93% dei pacchi, al primo tentativo l'89%.</p>
+      <div class="numeri">
+        <label for="sped">Costo di una spedizione, pagato al corriere</label><span class="u"><input id="sped" type="number" inputmode="decimal" min="0" step="0.01" value="7.5"> €</span>
+        <label for="evasione">Evasione e imballo per ordine</label><span class="u"><input id="evasione" type="number" inputmode="decimal" min="0" step="0.01" value="3"> €</span>
+        <label for="mancate">Pacchi persi, rotti o rientrati</label><span class="u"><input id="mancate" type="number" inputmode="decimal" min="0" max="100" step="0.1" value="4"> %</span>
+        <label for="mancata">Costo di uno di questi pacchi</label><span class="u"><input id="mancata" type="number" inputmode="decimal" min="0" step="0.01" value="8"> €</span>
+      </div>
+      <p class="dal">dal BMC: Attività chiave e Canali, fase di consegna</p>
+    </section>
+
+    <section class="b" style="grid-area: res">
+      <p class="riga">Dopo l'ordine</p>
+      <h2>Resi</h2>
+      <ul class="dom">
+        <li>Quanti ordini tornano indietro, e perché?</li>
+        <li>Quanti diventano un cambio e quanti un rimborso?</li>
+        <li>Chi paga il reso, e quanto costa davvero?</li>
+        <li>Quanto ci mette la merce a tornare in vendita?</li>
+      </ul>
+      <p class="es">Torna il 22% degli ordini, quasi sempre per la taglia: 10 su 100 diventano un cambio, 12 un rimborso. Il reso costa al cliente 5,90 €, trattenuti dal rimborso. Un paio torna in vendita dopo 6 giorni.</p>
+      <div class="numeri">
+        <label for="rimborsi">Ordini resi con rimborso</label><span class="u"><input id="rimborsi" type="number" inputmode="decimal" min="0" max="100" step="0.1" value="12"> %</span>
+        <label for="cambi">Ordini cambiati</label><span class="u"><input id="cambi" type="number" inputmode="decimal" min="0" max="100" step="0.1" value="10"> %</span>
+        <label for="rientro">Costo di un rientro: trasporto, controllo, merce da buttare</label><span class="u"><input id="rientro" type="number" inputmode="decimal" min="0" step="0.01" value="11"> €</span>
+      </div>
+      <p class="dal">nuovo, nel BMC non c'è</p>
+    </section>
+
+    <section class="b" style="grid-area: par">
+      <h2>Partner e strumenti</h2>
+      <ul class="dom">
+        <li>Quali sistemi tengono insieme ordini, scorte, spedizioni e pagamenti?</li>
+        <li>Cosa fai tu e cosa affidi ad altri?</li>
+        <li>Chi lavora sul negozio, e su cosa?</li>
+      </ul>
+      <p class="es">Shopify, un gestionale per le scorte, due corrieri, una piattaforma per spedizioni e tracking, Klarna, un'agenzia per le campagne. Sull'online lavorano 4 persone, una a tempo pieno.</p>
+      <div class="numeri">
+        <label for="persone">Persone al mese, assistenza a parte</label><span class="u"><input id="persone" type="number" inputmode="decimal" min="0" step="100" value="7000"> €</span>
+        <label for="software">Piattaforma e software al mese</label><span class="u"><input id="software" type="number" inputmode="decimal" min="0" step="100" value="700"> €</span>
+        <label for="agenzie">Agenzie e consulenti al mese</label><span class="u"><input id="agenzie" type="number" inputmode="decimal" min="0" step="100" value="1500"> €</span>
+        <label for="altro">Altri costi fissi al mese</label><span class="u"><input id="altro" type="number" inputmode="decimal" min="0" step="100" value="500"> €</span>
+      </div>
+      <p class="dal">dal BMC: Partner chiave e Risorse chiave</p>
+    </section>
+  </div>
+
+  <button type="button" class="avanti solo-strategia" id="avanti" data-passo="conti">Passo 2, i conti: ogni blocco ha i suoi numeri e tre scontrini li mettono insieme →</button>
+
+  <div class="conti solo-conti">
+    <section class="b" style="grid-area: cto">
+      <h2>Conto dell'ordine</h2>
+      <ul class="dom">
+        <li>Quanto resta di un ordine medio, prima e dopo il marketing?</li>
+        <li>Quale riga pesa di più, e quale puoi spostare?</li>
+      </ul>
+      <div class="scontrino">
+        <p class="s-testa">Ordine medio · IVA esclusa · percentuali su <span id="o-pagato">112,00</span> € pagati</p>
+        <div class="s-riga"><span>Valore a prezzo pieno</span><output id="o-prezzo">+120,00</output></div>
+        <div class="s-riga"><span>Sconti e codici</span><output id="o-sconti">−8,00</output></div>
+        <div class="s-riga"><span>Costo della merce</span><output id="o-merce">−48,00</output></div>
+        <div class="s-riga"><span>Margine perso sui rimborsi</span><output id="o-perso">−7,68</output></div>
+        <div class="s-sub"><span>Margine sul prodotto <small id="p-cm1">50,3%</small></span><output id="o-cm1">56,32</output></div>
+        <div class="s-riga"><span>Spedizione incassata dal cliente</span><output id="o-spedin">+1,18</output></div>
+        <div class="s-riga"><span>Spedizione pagata al corriere</span><output id="o-sped">−7,50</output></div>
+        <div class="s-riga"><span>Evasione e imballo</span><output id="o-evasione">−3,00</output></div>
+        <div class="s-riga"><span>Commissioni di pagamento</span><output id="o-pagamento">−2,46</output></div>
+        <div class="s-riga"><span>Commissioni di marketplace e affiliati</span><output id="o-vendita">−2,24</output></div>
+        <div class="s-riga"><span>Pacchi persi, rotti o rientrati</span><output id="o-mancate">−0,32</output></div>
+        <div class="s-riga"><span>Assistenza</span><output id="o-assistenza">−0,44</output></div>
+        <div class="s-riga"><span>Rientro della merce rimborsata</span><output id="o-rimborsi">−1,32</output></div>
+        <div class="s-riga"><span>Cambi: rientro e nuova spedizione</span><output id="o-cambi">−2,15</output></div>
+        <div class="s-sub"><span>Margine dopo i costi dell'ordine <small id="p-cm2">34,0%</small></span><output id="o-cm2">38,07</output></div>
+        <div class="s-riga"><span>Marketing per ordine <small id="o-mkt-nota">11.000,00&nbsp;€ ÷ 500&nbsp;ordini</small></span><output id="o-mkt">−22,00</output></div>
+        <div class="s-totale"><span>Resta in tasca per ordine <small id="p-cm3">14,3%</small></span><output id="o-cm3">16,07 €</output></div>
+      </div>
+      <p class="dal">dal BMC: Flussi di ricavi e Struttura dei costi, per un ordine</p>
+    </section>
+
+    <section class="b" style="grid-area: mes">
+      <h2>Conto del mese</h2>
+      <ul class="dom">
+        <li>Quanti ordini servono per coprire marketing e costi fissi?</li>
+        <li>Quali costi fissi salgono a scalini quando crescono gli ordini?</li>
+      </ul>
+      <div class="scontrino">
+        <p class="s-testa">Chiusura del mese · prima delle tasse</p>
+        <div class="s-riga s-info"><span>Fatturato <small id="m-fatturato-nota">500 ordini × 112,00&nbsp;€</small></span><output id="m-fatturato">56.000,00</output></div>
+        <div class="s-sub"><span>Margine degli ordini <small id="m-margine-nota">500 × 38,07&nbsp;€</small></span><output id="m-margine">+19.033,00</output></div>
+        <div class="s-riga"><span>Marketing</span><output id="m-mkt">−11.000,00</output></div>
+        <div class="s-riga"><span>Persone</span><output id="m-persone">−7.000,00</output></div>
+        <div class="s-riga"><span>Piattaforma e software</span><output id="m-software">−700,00</output></div>
+        <div class="s-riga"><span>Agenzie e consulenti</span><output id="m-agenzie">−1.500,00</output></div>
+        <div class="s-riga"><span>Altri costi fissi</span><output id="m-altro">−500,00</output></div>
+        <div class="s-riga"><span>Spazi e magazzino</span><output id="m-spazi">−1.200,00</output></div>
+        <div class="s-riga"><span>Merce invenduta o svalutata</span><output id="m-invenduto">−400,00</output></div>
+        <div class="s-totale"><span>Risultato del mese <small id="p-mese">−5,8% del fatturato</small></span><output id="m-risultato" class="perdita">−3.267,00 €</output></div>
+        <p class="s-dopo">Per andare in pari: <output id="m-pareggio">586 ordini al mese</output></p>
+      </div>
+      <p class="dal">dal BMC: Struttura dei costi</p>
+    </section>
+
+    <section class="b" style="grid-area: tem">
+      <h2>Il cliente nel tempo</h2>
+      <ul class="dom">
+        <li>Quanti ordini fa un cliente in un anno?</li>
+        <li>Quanto passa tra il primo e il secondo ordine?</li>
+        <li>Quanto rende un cliente in un anno, rispetto a quanto costa acquisirlo?</li>
+      </ul>
+      <div class="scontrino">
+        <p class="s-testa">Un cliente in un anno</p>
+        <div class="s-riga"><span>Margine prima del marketing <small id="t-anno-nota">1,5 ordini × 38,07&nbsp;€</small></span><output id="t-anno">57,10 €</output></div>
+        <div class="s-riga"><span>Costo di un cliente nuovo</span><output id="t-cac">30,00 €</output></div>
+        <div class="s-totale"><span>Rende, rispetto al costo</span><output id="t-rapporto">1,9 volte</output></div>
+      </div>
+      <p class="dal">nuovo, nel BMC non c'è</p>
+    </section>
+  </div>
+
+  <p class="piede">eCommerce Business Case Canvas di <a href="https://www.fumarola.it">Roberto Fumarola</a> è un adattamento del Business Model Canvas, ideato da <a href="https://www.strategyzer.com">Strategyzer AG</a>. L'originale ha licenza Creative Commons BY-SA 3.0; questo adattamento usa la versione successiva della stessa licenza, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it">Creative Commons Attribuzione - Condividi allo stesso modo 4.0 Internazionale</a>: puoi usarlo, cambiarlo e ridistribuirlo, anche per lavoro, se citi la fonte e mantieni la stessa licenza.</p>
+</main>
+
+<script>
+// La formula è la stessa del README; verifica.mjs la prova con le cifre dell'esempio.
+// calcola:inizio
+function calcola(v) {
+  const pagato = v.prezzo - v.sconti;
+  const rimborsi = v.rimborsi / 100, cambi = v.cambi / 100;
+  const prodotto = {
+    'o-prezzo': v.prezzo,
+    'o-sconti': -v.sconti,
+    'o-merce': -v.merce,
+    'o-perso': -rimborsi * (pagato - v.merce),
+  };
+  const ordine = {
+    'o-spedin': v.quotasped / 100 * v.spedcliente,
+    'o-sped': -v.sped,
+    'o-evasione': -v.evasione,
+    'o-pagamento': -pagato * v.pagamento / 100,
+    'o-vendita': -pagato * v.vendita / 100,
+    'o-mancate': -v.mancate / 100 * v.mancata,
+    'o-assistenza': -v.richieste / 100 * v.richiesta,
+    'o-rimborsi': -rimborsi * v.rientro,
+    'o-cambi': -cambi * (v.rientro + v.sped + v.evasione),
+  };
+  const fissi = {
+    'm-persone': -v.persone, 'm-software': -v.software, 'm-agenzie': -v.agenzie,
+    'm-altro': -v.altro, 'm-spazi': -v.spazi, 'm-invenduto': -v.invenduto,
+  };
+  const somma = o => Object.values(o).reduce((a, b) => a + b, 0);
+  const cm1 = somma(prodotto);
+  const cm2 = cm1 + somma(ordine);
+  const mktOrdine = v.ordini ? v.mkt / v.ordini : 0;
+  return {
+    righe: { ...prodotto, ...ordine, 'o-mkt': -mktOrdine, 'm-margine': v.ordini * cm2, 'm-mkt': -v.mkt, ...fissi },
+    pagato, cm1, cm2,
+    cm3: cm2 - mktOrdine,
+    fatturato: v.ordini * pagato,
+    mese: v.ordini * cm2 - v.mkt + somma(fissi),
+    // ponytail: nel pareggio il marketing resta fermo mentre crescono gli ordini; nella realtà più ordini chiedono più marketing
+    pareggio: cm2 > 0 ? Math.ceil((v.mkt - somma(fissi)) / cm2) : null,
+    anno: v.ripeti * cm2,
+  };
+}
+// calcola:fine
+
+const soldi = (x, segno) => (x < 0 ? '−' : segno ? '+' : '') + Math.abs(x).toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: 'always' });
+const intero = x => x.toLocaleString('it-IT', { maximumFractionDigits: 1, useGrouping: 'always' });
+const quota = (x, su) => su ? (x < 0 ? '−' : '') + Math.abs(x / su * 100).toLocaleString('it-IT', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%' : '';
+const scrivi = (id, testo) => { document.getElementById(id).textContent = testo; };
+const totale = (id, x, coda = '') => {
+  const el = document.getElementById(id);
+  el.textContent = soldi(x) + coda;
+  el.classList.toggle('perdita', x < 0);
+};
+
+function conti() {
+  const v = Object.fromEntries([...document.querySelectorAll('.canvas input')].map(i => [i.id, Number(i.value) || 0]));
+  const r = calcola(v);
+  for (const [id, x] of Object.entries(r.righe)) scrivi(id, soldi(x, true));
+  totale('o-cm1', r.cm1);
+  totale('o-cm2', r.cm2);
+  totale('o-cm3', r.cm3, ' €');
+  totale('m-risultato', r.mese, ' €');
+  scrivi('p-cm1', quota(r.cm1, r.pagato));
+  scrivi('p-cm2', quota(r.cm2, r.pagato));
+  scrivi('p-cm3', quota(r.cm3, r.pagato));
+  scrivi('o-pagato', soldi(r.pagato));
+  scrivi('o-mkt-nota', `${soldi(v.mkt)}\u00a0€ ÷ ${intero(v.ordini)}\u00a0ordini`);
+  scrivi('m-fatturato', soldi(r.fatturato));
+  scrivi('m-fatturato-nota', `${intero(v.ordini)} ordini × ${soldi(r.pagato)}\u00a0€`);
+  scrivi('m-margine-nota', `${intero(v.ordini)} × ${soldi(r.cm2)}\u00a0€`);
+  scrivi('p-mese', r.fatturato ? quota(r.mese, r.fatturato) + ' del fatturato' : '');
+  scrivi('m-pareggio', r.pareggio === null ? 'nessun numero di ordini basta, ogni ordine perde già prima del marketing' : intero(r.pareggio) + ' ordini al mese');
+  totale('t-anno', r.anno, ' €');
+  scrivi('t-anno-nota', `${intero(v.ripeti)} ordini × ${soldi(r.cm2)}\u00a0€`);
+  scrivi('t-cac', soldi(v.cac) + ' €');
+  const rapporto = document.getElementById('t-rapporto');
+  rapporto.textContent = v.cac ? (r.anno / v.cac).toLocaleString('it-IT', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' volte' : '';
+  rapporto.classList.toggle('perdita', v.cac > 0 && r.anno < v.cac);
+}
+document.querySelector('.canvas').addEventListener('input', conti);
+conti();
+
+const pagina = document.querySelector('.pagina');
+function mostra(chiave, valore) {
+  pagina.dataset[chiave] = valore;
+  for (const b of document.querySelectorAll(`.vista button[data-${chiave}]`)) b.setAttribute('aria-pressed', b.dataset[chiave] === valore);
+  document.getElementById('nota-es').hidden = pagina.dataset.passo !== 'conti' && pagina.dataset.vista !== 'esempio';
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('button[data-passo], button[data-vista]');
+  if (!b) return;
+  if (b.dataset.vista) return mostra('vista', b.dataset.vista);
+  mostra('passo', b.dataset.passo);
+  if (b.id === 'avanti') pagina.scrollIntoView();
+});
+</script>
+</body>
+</html>
