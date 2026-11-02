@@ -2,6 +2,8 @@
 
 Un canvas su una pagina per descrivere un negozio online, derivato dal Business Model Canvas di Osterwalder, con un conto a spanne della redditività. Bozza 0.3 del 5/10/2026.
 
+Si usa online su https://www.fumarola.it/ecommerce-canvas/
+
 Il canvas è `index.html`: si apre nel browser, non serve build. `node verifica.mjs` prova i conti con le cifre dell'esempio.
 
 ## L'idea
@@ -20,7 +22,7 @@ E tre cose che in un negozio online decidono tutto non hanno un posto.
 
 ## Cosa esiste già
 
-"Ecommerce business model canvas" come espressione esiste: [Sales Layer](https://blog.saleslayer.com/ecommerce-business-model-canvas), [BDC](https://www.bdc.ca/en/articles-tools/blog/short-guide-using-business-model-canvas-start-e-commerce-website), [Shopify](https://www.shopify.com/blog/business-model-canvas), [ecommerce-nation](https://www.ecommerce-nation.com/business-model-canvas-examples-step-guide/). In tutti i casi è il BMC con i suoi nove blocchi, riempito con esempi di negozi online. Nessuno cambia la struttura e nessuno fa i conti. Ricerca veloce del 30/9/2026, da approfondire prima di usare il nome in pubblico.
+"Ecommerce business model canvas" come espressione esiste: [Sales Layer](https://blog.saleslayer.com/ecommerce-business-model-canvas), [BDC](https://www.bdc.ca/en/articles-tools/blog/short-guide-using-business-model-canvas-start-e-commerce-website), [Shopify](https://www.shopify.com/blog/business-model-canvas), [ecommerce-nation](https://www.ecommerce-nation.com/business-model-canvas-examples-step-guide/). In tutti i casi è il BMC con i suoi nove blocchi, riempito con esempi di negozi online. Nessuno cambia la struttura e nessuno fa i conti.
 
 ## Com'è fatto
 
